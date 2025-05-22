@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">ARTICLES</a>
+    <div class="navbar-nav ms-auto">
+
+      @if (isAdmin()) {
+        <a class="nav-link" routerLink="/admin">Gérer les rôles</a>
+      }
+
+      @if (isAuthenticated()) {
+<!--        <a class="nav-link" routerLink="/editor">Write article</a>-->
+        <a class="nav-link" routerLink="/articles">Liste des articles</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
+      } @else {
+        <a class="nav-link" routerLink="/signin">Sign In</a>
+        <a class="nav-link" routerLink="/signup">Sign Up</a>
+      }
+
+    </div>
+  </div>
+</nav>

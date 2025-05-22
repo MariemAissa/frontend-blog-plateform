@@ -1,0 +1,81 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card shadow">
+        <div class="card-body p-5">
+          <h2 class="card-title text-center mb-4">Sign Up</h2>
+
+          <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username"
+                     formControlName="username"
+                     [class.is-invalid]="authForm.controls.username.invalid && authForm.controls.username.touched">
+              <div *ngIf="authForm.controls.username.invalid && authForm.controls.username.touched" class="invalid-feedback">
+                Please provide a username
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email"
+                     formControlName="email"
+                     [class.is-invalid]="authForm.controls.email.invalid && authForm.controls.email.touched">
+              <div *ngIf="authForm.controls.email.invalid && authForm.controls.email.touched" class="invalid-feedback">
+                {{ authForm.controls.email.hasError('required') ? 'Email is required' : 'Please enter a valid email' }}
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password"
+                     formControlName="password"
+                     (input)="calculateStrength()"
+                     [class.is-invalid]="authForm.controls.password.invalid && authForm.controls.password.touched">
+              <div class="form-text">
+                Password strength:
+                <span [ngClass]="{
+                  'text-danger': passwordStrength() === 'Weak',
+                  'text-warning': passwordStrength() === 'Medium',
+                  'text-success': passwordStrength() === 'Strong'
+                }">
+                  {{ passwordStrength() }}
+                </span>
+              </div>
+              <div *ngIf="authForm.controls.password.invalid && authForm.controls.password.touched" class="invalid-feedback">
+                Password must be at least 8 characters
+              </div>
+            </div>
+
+            <!-- Role -->
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select class="form-select" id="role"
+                      formControlName="role"
+                      [class.is-invalid]="authForm.controls.role.invalid && authForm.controls.role.touched">
+                <option value="">-- Select Role --</option>
+                <option value="admin">Admin</option>
+                <option value="editor">Éditeur</option>
+                <option value="author">Rédacteur</option>
+                <option value="reader">Lecteur</option>
+              </select>
+              <div *ngIf="authForm.controls.role.invalid && authForm.controls.role.touched" class="invalid-feedback">
+                Please select a role
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary w-100 py-2" [disabled]="authForm.invalid">SIGN UP</button>
+          </form>
+
+          <div class="text-center mt-3">
+            <a routerLink="/signin" class="text-decoration-none">Already have an account? Sign In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<!-- profile.component.html -->
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <img src="https://via.placeholder.com/150" class="rounded-circle mb-3" width="120" height="120" alt="Profile">
+          <h4>{{ profile().username }}, {{ profile().age }}</h4>
+          <p class="text-muted mb-1">
+            <i class="bi bi-geo-alt-fill"></i> {{ profile().location }}
+          </p>
+          <p class="mb-2">{{ profile().bio }}</p>
+          <p class="text-muted">
+            <i class="bi bi-mortarboard-fill"></i> {{ profile().education }}
+          </p>
+
+          <button class="btn btn-outline-primary mt-2">
+            <i class="bi bi-pencil-fill me-1"></i> EDIT PROFILE SETTINGS
+          </button>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mt-4">
+        <div class="card-header bg-transparent">
+          <h5 class="mb-0">Components</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-people-fill me-2"></i>Friends</span>
+              <span class="badge bg-primary rounded-pill">{{ profile().friends }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-images me-2"></i>Photos</span>
+              <span class="badge bg-primary rounded-pill">{{ profile().photos }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-chat-left-text-fill me-2"></i>Comments</span>
+              <span class="badge bg-primary rounded-pill">{{ profile().comments }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-8">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <button class="nav-link"
+                  [class.active]="activeTab() === 'posts'"
+                  (click)="setActiveTab('posts')">
+            My Posts
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link"
+                  [class.active]="activeTab() === 'favorites'"
+                  (click)="setActiveTab('favorites')">
+            Favorited Posts
+          </button>
+        </li>
+      </ul>
+
+      <div class="card shadow-sm border-top-0 rounded-top-0">
+        <div class="card-body">
+          @if (activeTab() === 'posts') {
+            <div class="d-flex flex-column gap-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h6 class="card-title">[puneethheanth]</h6>
+                      <p class="text-muted small">August 13, 2019</p>
+                    </div>
+                    <div>
+                      <button class="btn btn-sm btn-outline-primary me-2">
+                        <i class="bi bi-pencil-fill"></i> Edit
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash-fill"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                  <p class="card-text mt-2">This is my article content...</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h6 class="card-title">[abhishek]</h6>
+                      <p class="text-muted small">he is noughty</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          } @else {
+            <div class="text-center py-5">
+              <i class="bi bi-bookmark-star-fill display-5 text-muted mb-3"></i>
+              <p class="text-muted">No favorited posts yet.</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit Article' : 'Create Article' }}</h2>
+
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input formControlName="title" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Content</label>
+      <textarea formControlName="content" rows="6" class="form-control" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Image</label>
+      <input type="file" (change)="onFileSelected($event)" class="form-control" />
+    </div>
+
+    <div formArrayName="tags" class="mb-3">
+      <label class="form-label">Tags</label>
+
+      <div *ngFor="let tag of tags.controls; let i = index" class="input-group mb-2">
+        <input [formControlName]="i" class="form-control" placeholder="Tag" />
+        <button
+          class="btn btn-outline-danger"
+          type="button"
+          (click)="removeTag(i)"
+          aria-label="Remove tag"
+        >
+          Remove
+        </button>
+      </div>
+
+      <button class="btn btn-outline-primary" type="button" (click)="addTag()">Add Tag</button>
+    </div>
+
+
+    <button type="submit" class="btn btn-success mt-3" [disabled]="articleForm.invalid">
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+  </form>
+</div>
